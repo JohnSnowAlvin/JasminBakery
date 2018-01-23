@@ -23,3 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::view('products','products');
 Route::get('/products','ProductsController@get');
+Route::get('user.profile','UserController@index');
+Route::get('cart','CartController@get');
+Route::get('orderhistory','OrderHistoryController@get');
+Route::get('user.editProfile','UserController@update()');

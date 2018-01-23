@@ -14,6 +14,7 @@ return [
     */
 
     'default' => env('DB_CONNECTION', 'mysql'),
+    'unix_socket'   => env('UNIX_SOCKET',    '/Applications/MAMP/tmp/mysql/mysql.sock'),
 
     /*
     |--------------------------------------------------------------------------
