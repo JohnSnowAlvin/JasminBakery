@@ -22,8 +22,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/products')
 
 //Route::view('products','products');
-Route::get('/products','ProductsController@get');
+Route::get('/products','ProductsController@index');
 Route::get('user.profile','UserController@index');
 Route::get('cart','CartController@get');
 Route::get('orderhistory','OrderHistoryController@get');
-Route::get('user.editProfile','UserController@update()');
+Route::get('user.editProfile','UserController@update');
+Route::get('map');
+
+//Route::group(['middleware'=>'admin'],function (){
+//    Route::resource('admin/users','AdminUsersController');
+//});
+
+Route::resource('admin/user','AdminUsersController');

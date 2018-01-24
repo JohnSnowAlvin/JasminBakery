@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Photo;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AdminUsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return view ('user.profile',compact('user'));
-
+        $users = User::all();
+        return view('admin.user.index',compact('users'));
     }
 
     /**
@@ -26,7 +27,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::pluck('name','id')->all();
+
+        return view('admin.users.create',compact('roles'));
     }
 
     /**
@@ -37,7 +40,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+            $name = time(). $file->getClientOriginalName();
+
+            $file->move('images',$name);
+
+            $photo = Photo::create(['file'=>$name]);
+
+            $input['photo_id'] = $photo->id;
+
+        }
+        $input['password'] = bcrypt($request->password);
+        User::create($input);
+
+        return redirect('/admin/users');
     }
 
     /**
@@ -59,9 +77,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-//        return $user->fisrtName;
-        return view('user.editProfile',compact('user'));
+        return view('admin.users.edit');
     }
 
     /**

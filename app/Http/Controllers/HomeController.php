@@ -24,7 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = User::all()->get('email');
+        if($user = "jasminbakery@gmail.com"){
+            return view('admin.index');
+        }else{
+            return view('home');
+        }
+
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -23,9 +24,26 @@ class LoginController extends Controller
     /**
      * Where to redirect users after login.
      *
-     * @var string
+     *
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    protected $redirectTo = '/home';
+
+
+
+    public function login()
+    {
+        $user = User::all();
+        $email = $user->get('email');
+        if($email = "jasminbakery@gmail.com"){
+//            protected $redirectToAdmin = 'admin/index';
+            return  view( 'admin/index');
+        }else{
+//            protected $redirectTo = '/home';
+            return  view( '/home');
+        }
+    }
+//    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.

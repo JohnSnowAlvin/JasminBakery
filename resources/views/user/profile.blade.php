@@ -17,7 +17,7 @@
                                     </tr>
                                     <tr>
                                         <td>Last Name</td>
-                                        <td>{{ ucfirst(Auth::user()->lastName) }}}</td>
+                                        <td>{{ ucfirst(Auth::user()->lastName) }}</td>
                                     </tr>
                                     <tr>
                                         <td>Email</td>
@@ -33,7 +33,7 @@
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td align="right"><a href="{{ url('user.editProfile') }}"><input type="button" value="Edit Profile"></a></td>
+                                        <td align="right"><a href="{{ url('user.editProfile', $user->id) }}"><input type="button" value="Edit Profile" class="btn btn-primary"></a></td>
                                     </tr>
                                 @endforeach
                             @endif
